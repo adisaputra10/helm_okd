@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: '2020-07-21T07:22:48Z'
+  name: route
+  namespace: project
+spec:
+  host: domainzzzzz.com
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: nginx
+
