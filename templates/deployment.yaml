@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: telkomindonesia/debian:php-7.3-nginx-novol
+        image: telkomindonesia/debian:php-7.4-nginx
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
