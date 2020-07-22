@@ -8,9 +8,14 @@ chmod 700 get_helm.sh
 ```
 
 
-**Helm v3**
+**Install apps via v3**
 
 ```sh
 helm install nginx .
 ```
 
+**update apps via helm v3**
+
+```sh
+helm upgrade nginx  .
+```
