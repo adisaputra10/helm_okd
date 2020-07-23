@@ -27,14 +27,14 @@ spec:
         ports:
         - containerPort: {{ .Values.PORTS }}
         resources: {limits: {memory: "{{ .Values.MEMORY_LIMIT }}" }}
-        livenessProbe: { initialDelaySeconds: 30, tcpSocket: {port: 3306}, timeoutSeconds: 1}
-        readinessProbe: { exec: {command: ["/bin/sh","-i","-c","MYSQL_PWD=\"$MYSQL_PASSWORD\" mysql -h 127.0.0.1 -u $MYSQL_USER -D $MYSQL_DATABASE -e 'SELECT 1'"]}, initialDelaySeconds: 5, timeoutSeconds: 1}
+        livenessProbe: { initialDelaySeconds: 30, tcpSocket: {port: 6379}, timeoutSeconds: 1}
+        readinessProbe: { exec: {command: ["/bin/sh","-i","-c","/bin/sh","-i","-c","test \"$(redis-cli -h 127.0.0.1 -a $REDIS_PASSWORD ping)\" == \"PONG\""]}, initialDelaySeconds: 5, timeoutSeconds: 1}
         envFrom:
         - secretRef:
             name: {{ .Values.NAME }}
         volumeMounts:
         - name: {{ .Values.NAME }}
-          mountPath: /var/lib/mysql/data 
+          mountPath: /var/lib/redis/data 
           readOnly: false
       volumes:
         - name: {{ .Values.NAME }}

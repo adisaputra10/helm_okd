@@ -1,0 +1,11 @@
+NAME: postgresql
+IMAGES: telkomindonesia/debian:postgresql-11
+PORTS: 5432
+PROJECT: project
+DATABASE: db
+PASSWORD: password
+ROOT_PASSWORD: password
+USER: user
+CAPACITY: 2Gi
+MEMORY_LIMIT: 512Mi
+

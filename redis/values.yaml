@@ -1,0 +1,8 @@
+NAME: redis
+IMAGES: telkomindonesia/alpine:redis-5.0
+PORTS: 6379
+PROJECT: project
+REDIS_PASSWORD: passwordredis
+CAPACITY: 2Gi
+MEMORY_LIMIT: 256Mi
+
