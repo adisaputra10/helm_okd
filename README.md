@@ -19,3 +19,7 @@ helm install nginx .
 ```sh
 helm upgrade nginx  .
 ```
+
+```sh
+helm upgrade secret . --set env=prod   -f values.yaml -f env.yaml 
+```
