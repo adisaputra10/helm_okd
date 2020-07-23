@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.NAME }}
+  namespace: {{ .Values.PROJECT }}
+  labels:
+    chart: '{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}'
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.NAME }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.NAME }}
+    spec:
+      containers: [{  name: "{{ .Values.NAME }}", image: "{{ .Values.IMAGES }}",
+                            env: [{name: "ES_JAVA_OPTS", value: "-Xms{{ .Values.ELASTICSEARCH_JAVA_MEMORY }} -Xmx{{ .Values.ELASTICSEARCH_JAVA_MEMORY }}"}],
+                            livenessProbe: { failureThreshold: 3, initialDelaySeconds: 120, periodSeconds: 10, successThreshold: 1, tcpSocket: {port: 9200}, timeoutSeconds: 1},
+                            readinessProbe: { failureThreshold: 3, initialDelaySeconds: 120, periodSeconds: 10, successThreshold: 1, tcpSocket: {port: 9200}, timeoutSeconds: 1},
+                            ports: [{containerPort: 9200, protocol: TCP },{containerPort: 9300, protocol: TCP }],
+                            resources: {limits: {memory: "{{ .Values.MEMORY_LIMIT }}"}},
+                            volumeMounts: [{ mountPath: "/opt/elasticsearch/data", name: "{{ .Values.NAME }}" }],
+                            imagePullPolicy: Always }]
+      volumes:
+        - name: {{ .Values.NAME }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.NAME }}
+

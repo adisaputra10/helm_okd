@@ -1,0 +1,8 @@
+NAME: kibana
+IMAGES: kibana:6.5.4
+PORTS: 8080
+PROJECT: project
+MEMORY_LIMIT: 512Mi
+ELASTICSEARCH_URL: http://elasticsearch:9200
+PROXY_IMAGE: telkomindonesia/alpine:nginx-1.12.2-proxy 
+DOMAIN: kibana-test.okd.io

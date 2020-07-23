@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.NAME }}
+  namespace: {{ .Values.PROJECT }}
+  labels:
+    chart: '{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}'
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.NAME }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.NAME }}
+    spec:
+      containers: [{name: "{{ .Values.NAME }}", image: "{{ .Values.IMAGES }}",
+                            env: [{name: "ELASTICSEARCH_URL", value: "{{  .Values.ELASTICSEARCH_URL }}"}],
+                            ports: [{containerPort: 5601, protocol: TCP }],
+                            resources: {limits: {memory: "{{ .Values.MEMORY_LIMIT }}"}},
+                            imagePullPolicy: Always },
+                           {  name: "proxy", image: "{{ .Values.PROXY_IMAGE }}",
+                            env: [{name: "NGINX_PROXY_PASS_URL", value: "http://localhost:5601"},
+                                  {name: "NGINX_BASIC_AUTH_ENABLED", value: "true"},
+                                  {name: "NGINX_BASIC_AUTH_USERNAME", value: "kibanauser"},
+                                  {name: "NGINX_BASIC_AUTH_PASSWORD", value: "kibanapass123"},
+                                  {name: "NGINX_BASIC_AUTH_REMOVE", value: "true"},],
+                            livenessProbe: { failureThreshold: 3, initialDelaySeconds: 120, periodSeconds: 10, successThreshold: 1, tcpSocket: {port: 8080}, timeoutSeconds: 1},
+                            readinessProbe: { failureThreshold: 3, initialDelaySeconds: 120, periodSeconds: 10, successThreshold: 1, tcpSocket: {port: 8080}, timeoutSeconds: 1},
+                            ports: [{containerPort: 8080, protocol: TCP }],
+                            imagePullPolicy: Always }]
+

@@ -1,0 +1,7 @@
+NAME: logstash
+IMAGES: telkomindonesia/alpine:logstash-6.5
+PORTS: 5000
+PROJECT: project
+CAPACITY: 2Gi
+MEMORY_LIMIT: 512Mi
+LOGSTASH_JAVA_MEMORY: 256M

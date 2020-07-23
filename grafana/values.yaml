@@ -1,0 +1,5 @@
+NAME: grafana
+IMAGES: grafana/grafana
+PORTS: 3000
+PROJECT: project
+MEMORY_LIMIT: 512Mi

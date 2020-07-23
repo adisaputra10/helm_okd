@@ -1,0 +1,7 @@
+NAME: elasticsearch
+IMAGES: telkomindonesia/alpine:elasticsearch-6.5
+PORTS: 9200
+PROJECT: project
+CAPACITY: 2Gi
+MEMORY_LIMIT: 512Mi
+ELASTICSEARCH_JAVA_MEMORY: 256M

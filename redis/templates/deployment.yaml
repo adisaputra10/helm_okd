@@ -28,7 +28,7 @@ spec:
         - containerPort: {{ .Values.PORTS }}
         resources: {limits: {memory: "{{ .Values.MEMORY_LIMIT }}" }}
         livenessProbe: { initialDelaySeconds: 30, tcpSocket: {port: 6379}, timeoutSeconds: 1}
-        readinessProbe: { exec: {command: ["/bin/sh","-i","-c","/bin/sh","-i","-c","test \"$(redis-cli -h 127.0.0.1 -a $REDIS_PASSWORD ping)\" == \"PONG\""]}, initialDelaySeconds: 5, timeoutSeconds: 1}
+        readinessProbe: { exec: {command: ["/bin/sh","-i","-c","test \"$(redis-cli -h 127.0.0.1 -a $REDIS_PASSWORD ping)\" == \"PONG\""]}, initialDelaySeconds: 5, timeoutSeconds: 1}
         envFrom:
         - secretRef:
             name: {{ .Values.NAME }}
