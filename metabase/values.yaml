@@ -1,0 +1,6 @@
+NAME: metabase
+IMAGES: telkomindonesia/alpine:metabase-0.35
+PORTS: 3000
+PROJECT: project
+CAPACITY: 2Gi
+MEMORY_LIMIT: 512Mi

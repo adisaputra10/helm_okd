@@ -1,0 +1,7 @@
+NAME: kafka
+IMAGES: telkomindonesia/alpine:kafka-2.1
+PORTS: 9092
+PORTS_ZOOKEEPER: 2181
+PROJECT: project
+CAPACITY: 2Gi
+MEMORY_LIMIT: 512Mi

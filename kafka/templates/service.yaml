@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.NAME }}
+  namespace: {{ .Values.PROJECT }}
+spec:
+  type: ""
+  ports:
+    - port: {{ .Values.PORTS }}
+      targetPort: {{ .Values.PORTS }}
+      protocol: TCP
+      name: tcp-{{ .Values.PORTS }}
+    - port: {{ .Values.PORTS_ZOOKEEPER }}
+      targetPort: {{ .Values.PORTS_ZOOKEEPER }}
+      protocol: TCP
+      name: tcp-{{ .Values.PORTS_ZOOKEEPER }}
+  selector: 
+      app: {{ .Values.NAME }}  
+

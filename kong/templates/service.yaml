@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.NAME }}
+  namespace: {{ .Values.PROJECT }}
+spec:
+  type: ""
+  ports: [{name: "kong-http", port: 8000},
+                {name: "kong-https", port: 8443},
+                {name: "kong-http-admin-api", port: 8001},
+                {name: "kong-https-admin-api", port: 8444}]
+  selector: 
+      app: {{ .Values.NAME }}  
+

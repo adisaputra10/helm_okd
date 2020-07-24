@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.NAME }}
+  namespace: {{ .Values.PROJECT }}
+  labels:
+    chart: '{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}'
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.NAME }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.NAME }}
+    spec:
+      containers: [{  name: "{{ .Values.NAME }}", image: "{{ .Values.IMAGES }}",
+                            env: [{name: "INFLUX_DATABASE", value: "jmeter"},{name: "INLFUX_ADMIN_USER", value: "grafana"},{name: "INFLUX_ADMIN_PASS", value: "grafana"}],
+                            livenessProbe: { failureThreshold: 3, initialDelaySeconds: 120, periodSeconds: 10, successThreshold: 1, tcpSocket: {port: 8086}, timeoutSeconds: 1},
+                            readinessProbe: { failureThreshold: 3, initialDelaySeconds: 120, periodSeconds: 10, successThreshold: 1, tcpSocket: {port: 8086}, timeoutSeconds: 1},
+                            ports: [{containerPort: 8086, protocol: TCP }],
+                            resources: {limits: {memory: "{{ .Values.MEMORY_LIMIT }}"}},
+                            volumeMounts: [{ mountPath: "/var/lib/influxdb", name: "{{ .Values.NAME }}" }],
+                            imagePullPolicy: Always }]
+      volumes:
+        - name: {{ .Values.NAME }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.NAME }}
+

@@ -1,0 +1,7 @@
+NAME: neo4j
+IMAGES: telkomindonesia/alpine:neo4j-3.5
+PORTS: 7687
+PROJECT: project
+CAPACITY: 2Gi
+MEMORY_LIMIT: 512Mi
+NEO4J_MEMORY_LIMIT: 512M

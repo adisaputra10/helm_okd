@@ -1,0 +1,5 @@
+NAME: other
+IMAGES: telkomindonesia/alpine:adminer-4.6.2
+PORTS: 8080
+PROJECT: project
+MEMORY_LIMIT: 512Mi

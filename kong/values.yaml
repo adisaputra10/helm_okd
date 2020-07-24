@@ -1,0 +1,5 @@
+NAME: kong
+IMAGES:  telkomindonesia/alpine:kong-2.0
+PROJECT: project
+MEMORY_LIMIT: 512Mi
+#DOMAIN: (default domain if empty)

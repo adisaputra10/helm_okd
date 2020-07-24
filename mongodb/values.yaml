@@ -1,0 +1,11 @@
+NAME: mongodb
+IMAGES: telkomindonesia/alpine:mongodb-3.6
+PORTS: 27017
+PROJECT: project
+DATABASE: db
+PASSWORD: password
+ADMIN_PASSWORD: password
+USER: user
+CAPACITY: 2Gi
+MEMORY_LIMIT: 512Mi
+

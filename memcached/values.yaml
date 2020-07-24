@@ -1,0 +1,5 @@
+NAME: memcached
+IMAGES: telkomindonesia/alpine:memcached-1.6
+PORTS: 11211
+PROJECT: project
+MEMORY_LIMIT: 512Mi

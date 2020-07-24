@@ -1,0 +1,8 @@
+NAME: rabbitmq
+IMAGES: telkomindonesia/alpine:rabbitmq-3.7-management
+PORTS: 15672
+PROJECT: project
+CAPACITY: 2Gi
+MEMORY_LIMIT: 512Mi
+USER: user
+PASSWORD: passwoe

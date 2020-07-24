@@ -1,0 +1,7 @@
+NAME: influxdb
+IMAGES: telkomindonesia/alpine:influxdb-1.7
+PORTS: 8086
+PROJECT: project
+CAPACITY: 2Gi
+MEMORY_LIMIT: 512Mi
+#DOMAIN: (EMPTY DOMAIN DEFAULT)
