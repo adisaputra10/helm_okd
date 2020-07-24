@@ -1,0 +1,5 @@
+NAME: user-service
+IMAGES: user-service
+PORTS: 9000
+PROJECT: tds-customer-dev
+MEMORY_LIMIT: 512Mi

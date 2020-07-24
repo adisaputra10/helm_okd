@@ -1,0 +1,11 @@
+NAME: mysql
+IMAGES: telkomindonesia/debian:mariadb-10.1
+PORTS: 3306
+PROJECT: project
+MYSQL_DATABASE: db
+MYSQL_PASSWORD: password
+MYSQL_ROOT_PASSWORD: password
+MYSQL_USER: password
+CAPACITY: 2Gi
+MEMORY_LIMIT: 1Gi
+env: dev

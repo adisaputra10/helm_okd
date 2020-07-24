@@ -1,0 +1,5 @@
+NAME: name_service
+IMAGES: name_service
+PORTS: 9000
+PROJECT: name_project
+MEMORY_LIMIT: 512Mi

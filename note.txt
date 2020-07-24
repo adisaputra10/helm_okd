@@ -1,0 +1,5 @@
+  302  cp -Rf ../../templates/dev/apps-be user-service
+  304  nano user-service/values.yaml (update value )
+  310  helm install user-service ./dev/user-service
+
+

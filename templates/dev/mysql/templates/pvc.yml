@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.NAME }}
+  namespace: {{ .Values.PROJECT }}-{{ .Values.env }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+     requests:
+       storage: {{ .Values.CAPACITY }}
+

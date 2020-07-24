@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.NAME }}
+  namespace: {{ .Values.PROJECT }}-{{ .Values.env }}
+  labels:
+    chart: '{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}'
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.NAME }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.NAME }}
+    spec:
+      containers:
+      - name: {{ .Values.NAME }}
+        image: {{ .Values.IMAGES }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: {{ .Values.PORTS }}
+        resources: {limits: {memory: "{{ .Values.MEMORY_LIMIT }}" }}
+        livenessProbe: { initialDelaySeconds: 30, tcpSocket: {port: 3306}, timeoutSeconds: 1}
+        readinessProbe: { exec: {command: ["/bin/sh","-i","-c","MYSQL_PWD=\"$MYSQL_PASSWORD\" mysql -h 127.0.0.1 -u $MYSQL_USER -D $MYSQL_DATABASE -e 'SELECT 1'"]}, initialDelaySeconds: 5, timeoutSeconds: 1}
+        envFrom:
+        - secretRef:
+            name: {{ .Values.NAME }}
+        volumeMounts:
+        - name: {{ .Values.NAME }}
+          mountPath: /var/lib/mysql/data 
+          readOnly: false
+      volumes:
+        - name: {{ .Values.NAME }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.NAME }}
+

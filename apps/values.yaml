@@ -1,7 +1,0 @@
-env: dev
-NAME: apps
-IMAGES: telkomindonesia/debian:php-7.4-nginx
-PORTS: 8080
-PROJECT: project
-MEMORY_LIMIT: 512Mi
-DOMAIN: apps-project.apps.okd.nip.io 

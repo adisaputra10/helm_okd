@@ -1,0 +1,5 @@
+NAME: apm
+IMAGES: telkomindonesia/alpine:apm-7.4
+PORTS: 8200
+PROJECT: name_project
+MEMORY_LIMIT: 512Mi
